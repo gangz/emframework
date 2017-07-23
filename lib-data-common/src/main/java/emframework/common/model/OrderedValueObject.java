@@ -1,5 +1,6 @@
 package emframework.common.model;
 
+import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
 /**
@@ -10,6 +11,7 @@ import javax.persistence.MappedSuperclass;
  */
 @MappedSuperclass
 public abstract class OrderedValueObject extends ValueObject {
+	@Column(nullable=false)
 	private Byte sequence = Byte.MAX_VALUE;
 
 	public Byte getSequence() {

@@ -5,7 +5,7 @@ import emframework.common.exception.UserNotLoggedInException;
 
 public interface SesssionManager {
 	SessionDTO getSession(String token) throws UserNotLoggedInException;
-	SessionDTO buildSession(String token, Object u, Long timeoutHours);
 	void removeByToken(String token);
 	String generateUUID();
+	void buildSession(String token, SessionDTO session, Long timeoutHours);
 }

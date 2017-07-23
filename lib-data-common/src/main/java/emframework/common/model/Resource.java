@@ -13,8 +13,9 @@ import emframework.common.data.SessionDTO;
  */
 @MappedSuperclass
 public abstract class Resource extends GeneralResource {
-
+	@Column(length=60,nullable=false)
 	private String creatorId=null;
+	@Column(length=60,nullable=false)
     private Long creationTime;
     public Resource(){}
 	public Long getCreationTime() {

@@ -40,7 +40,7 @@ public class AuthenticationFilter extends GenericFilterBean {
 		Optional<String> token = Optional.fromNullable(httpRequest.getParameter("token"));
 		String resourcePath = new UrlPathHelper().getPathWithinApplication(httpRequest);
 		try {
-			if (resourcePath.contains("/u/users/login") || resourcePath.contains("/public/"))
+			if (resourcePath.contains("/accounts/login") || resourcePath.contains("/public/"))
 				processLoginAuth(resourcePath);
 			else if (token.isPresent()) {
 				processTokenAuthentication(token);

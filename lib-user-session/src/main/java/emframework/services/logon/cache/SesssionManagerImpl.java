@@ -31,8 +31,8 @@ public class SesssionManagerImpl implements SesssionManager {
 		return session;
 	}
 	
-	private void add(String token, SessionDTO user, Long timeoutHours) {
-		String jsonSession = JsonUtil.toJsonString(user);
+	private void add(String token, SessionDTO session, Long timeoutHours) {
+		String jsonSession = JsonUtil.toJsonString(session);
 		if (timeoutHours.equals(0)){
 			redisTemplate.opsForValue().set(TOKEN+token, jsonSession);
 		}else{
@@ -46,10 +46,8 @@ public class SesssionManagerImpl implements SesssionManager {
 	}
 
 	@Override
-	public SessionDTO buildSession(String token, Object u, Long timeoutHours) {
-		SessionDTO d = new SessionDTO();
-		add(token,d,timeoutHours);
-		return d;
+	public void buildSession(String token, SessionDTO session, Long timeoutHours) {
+		add(token,session,timeoutHours);
 	}
 
 	@Override
