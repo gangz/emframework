@@ -13,16 +13,16 @@ import java.util.List;
  */
 
 
-public class PostGeneralPageDTO<T> extends PageDescDTO implements Serializable{
+public class GeneralPageDTO<T> extends PageDescDTO implements Serializable{
   @JsonProperty("data")
   private List<T> data = new ArrayList<T>();
 
-  public PostGeneralPageDTO data(List<T> data) {
+  public GeneralPageDTO data(List<T> data) {
     this.data = data;
     return this;
   }
 
-  public PostGeneralPageDTO addDataItem(T dataItem) {
+  public GeneralPageDTO addDataItem(T dataItem) {
     this.data.add(dataItem);
     return this;
   }
@@ -49,7 +49,7 @@ public class PostGeneralPageDTO<T> extends PageDescDTO implements Serializable{
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PostGeneralPageDTO postBriefPageDTO = (PostGeneralPageDTO) o;
+    GeneralPageDTO postBriefPageDTO = (GeneralPageDTO) o;
     return Objects.equals(this.data, postBriefPageDTO.data) &&
         super.equals(o);
   }

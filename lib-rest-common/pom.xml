@@ -4,7 +4,6 @@
 	<groupId>cn.emergentdesign.emframework</groupId>
 	<artifactId>lib-rest-common</artifactId>
 	<packaging>jar</packaging>
-	<version>0.0.1-SNAPSHOT</version>
 	<properties>
 		<okhttp-version>2.7.5</okhttp-version>
 		<gson-version>2.6.2</gson-version>

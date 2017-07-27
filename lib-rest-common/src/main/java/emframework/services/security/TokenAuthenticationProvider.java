@@ -15,8 +15,6 @@ public class TokenAuthenticationProvider implements AuthenticationProvider {
 
 	@Autowired
     private SessionTokenVerifier sessionTokenVerifier;
-	@Autowired
-	private BackendRootTokenVerifier rootTokenVerifier;
 
     public TokenAuthenticationProvider() {
     }
@@ -29,8 +27,6 @@ public class TokenAuthenticationProvider implements AuthenticationProvider {
         }
         if (sessionTokenVerifier.contains(token.get())) {
         	return sessionTokenVerifier.retrieve(token.get());
-        }else if (rootTokenVerifier.contains(token.get())){
-        	return rootTokenVerifier.retrieve(token.get());
         }else{
         	throw new BadCredentialsException("Invalid token or token expired");
         }

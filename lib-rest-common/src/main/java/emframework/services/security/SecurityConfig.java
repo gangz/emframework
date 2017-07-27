@@ -22,8 +22,15 @@ import javax.servlet.http.HttpServletResponse;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired AuthenticationProvider tokenAuthenticationProvider;
+	AuthenticationFilter filter;
+	
+	public void addExceptionPath(String path){
+		filter.addExceptionPath(path);
+	}
+	
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+    	filter = new AuthenticationFilter(authenticationManager());
         http.
                 csrf().disable().
                 sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).
@@ -33,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 and().
                 anonymous().disable().
                 exceptionHandling().authenticationEntryPoint(unauthorizedEntryPoint());
-        http.addFilterBefore(new AuthenticationFilter(authenticationManager()), BasicAuthenticationFilter.class);
+        http.addFilterBefore(filter, BasicAuthenticationFilter.class);
     }
 
     @Override

@@ -20,6 +20,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import emframework.services.security.authentications.AnonymousAuthentication;
 
@@ -27,7 +29,7 @@ public class AuthenticationFilter extends GenericFilterBean {
 
 	private final static Logger logger = LoggerFactory.getLogger(AuthenticationFilter.class);
 	private AuthenticationManager authenticationManager;
-
+	private List<String> exceptionPath = new ArrayList<>();
 	public AuthenticationFilter(AuthenticationManager authenticationManager) {
 		this.authenticationManager = authenticationManager;
 	}
@@ -40,7 +42,7 @@ public class AuthenticationFilter extends GenericFilterBean {
 		Optional<String> token = Optional.fromNullable(httpRequest.getParameter("token"));
 		String resourcePath = new UrlPathHelper().getPathWithinApplication(httpRequest);
 		try {
-			if (resourcePath.contains("/accounts/login") || resourcePath.contains("/public/"))
+			if (isExceptionPath(resourcePath))
 				processLoginAuth(resourcePath);
 			else if (token.isPresent()) {
 				processTokenAuthentication(token);
@@ -57,6 +59,18 @@ public class AuthenticationFilter extends GenericFilterBean {
 		}
 	}
 
+	private boolean isExceptionPath(String resourcePath) {
+		for (String path:this.exceptionPath){
+			if (resourcePath.contains(path))
+				return true;
+		}
+		return false;
+	}
+
+	public void addExceptionPath(String path){
+		this.exceptionPath.add(path);
+	}
+	
 	private HttpServletRequest asHttp(ServletRequest request) {
 		return (HttpServletRequest) request;
 	}
