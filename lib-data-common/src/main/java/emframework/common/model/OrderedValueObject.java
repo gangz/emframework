@@ -12,13 +12,13 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public abstract class OrderedValueObject extends ValueObject {
 	@Column(nullable=false)
-	private Byte sequence = Byte.MAX_VALUE;
+	private Integer sequence = Integer.MAX_VALUE;
 
-	public Byte getSequence() {
+	public Integer getSequence() {
 		return sequence;
 	}
 
-	public void setSequence(Byte sequence) {
+	public void setSequence(Integer sequence) {
 		this.sequence = sequence;
 	}
 

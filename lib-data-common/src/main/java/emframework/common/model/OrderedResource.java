@@ -10,13 +10,13 @@ import javax.persistence.MappedSuperclass;
  */
 @MappedSuperclass
 public abstract class OrderedResource extends Resource {
-	private Byte sequence = 0;
+	private Integer sequence = 0;
 
-	public Byte getSequence() {
+	public Integer getSequence() {
 		return sequence;
 	}
 
-	public void setSequence(Byte sequence) {
+	public void setSequence(Integer sequence) {
 		this.sequence = sequence;
 	}
 
