@@ -25,12 +25,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	AuthenticationFilter filter;
 	
 	public void addExceptionPath(String path){
-		filter.addExceptionPath(path);
+		try {
+			getFilter().addExceptionPath(path);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-    	filter = new AuthenticationFilter(authenticationManager());
         http.
                 csrf().disable().
                 sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).
@@ -40,8 +43,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 and().
                 anonymous().disable().
                 exceptionHandling().authenticationEntryPoint(unauthorizedEntryPoint());
-        http.addFilterBefore(filter, BasicAuthenticationFilter.class);
+        http.addFilterBefore(getFilter(), BasicAuthenticationFilter.class);
     }
+
+	private AuthenticationFilter getFilter() throws Exception {
+		if (filter==null)
+			filter = new AuthenticationFilter(authenticationManager());
+		return filter;
+	}
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
