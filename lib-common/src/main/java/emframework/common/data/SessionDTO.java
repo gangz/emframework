@@ -8,7 +8,7 @@ public class SessionDTO implements Serializable {
 	private String token = null;
 	private String userId = null;
 	private String role = null;
-
+	private String accountId = null;
 	
 	public SessionDTO() {
 
@@ -47,6 +47,14 @@ public class SessionDTO implements Serializable {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+	public String getAccountId() {
+		return accountId;
+	}
+
+	public void setAccountId(String accountId) {
+		this.accountId = accountId;
 	}
 	
 }
