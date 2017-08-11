@@ -19,7 +19,7 @@ public abstract class GeneralResource {
 	@Id   
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	@GeneratedValue(generator = "uuid")
-	@Column(length=60)
+	@Column(length=100)
 	private String id;
 	public String getId() {
         return id;
