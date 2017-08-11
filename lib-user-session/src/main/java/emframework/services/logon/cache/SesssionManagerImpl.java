@@ -9,10 +9,11 @@ import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 
-@Service
+@Component
 public class SesssionManagerImpl implements SesssionManager {
 	private static final String TOKEN = "tk:";
 	@Autowired
@@ -40,6 +41,7 @@ public class SesssionManagerImpl implements SesssionManager {
 			redisTemplate.opsForValue().set(TOKEN+token, jsonSession, timeoutHours.longValue(), TimeUnit.HOURS);
 		}
 	}
+	
 	@Override
 	public void removeByToken(String token){
 		redisTemplate.delete(TOKEN + token);
@@ -54,4 +56,19 @@ public class SesssionManagerImpl implements SesssionManager {
 	public String generateUUID() {
 		return UUID.randomUUID().toString();
 	}
+
+	@Override
+	public void addKey(String code){
+		String value= "1";
+		
+		redisTemplate.opsForValue().set(TOKEN+code,value,10,TimeUnit.MINUTES);
+		
+		}
+
+	@Override
+	public String getCode(String code) {
+		String jsonSession = redisTemplate.opsForValue().get(TOKEN+code);
+		return jsonSession;
+	}
+	
 }

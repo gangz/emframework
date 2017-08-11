@@ -8,4 +8,7 @@ public interface SesssionManager {
 	void removeByToken(String token);
 	String generateUUID();
 	void buildSession(String token, SessionDTO session, Long timeoutHours);
+	
+	void addKey(String randomNubSix);
+	String getCode(String code);
 }

@@ -33,6 +33,6 @@ public abstract class Resource extends GeneralResource {
 	
 	public void addCreationMark(SessionDTO session) {
 		this.setCreationTime(System.currentTimeMillis());
-		this.setCreatorId(session.getUserId());
+		this.setCreatorId(session.getAccountId());
 	}
 }
