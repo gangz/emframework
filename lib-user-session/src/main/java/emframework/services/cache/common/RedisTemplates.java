@@ -15,7 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class RedisTemplates {
 	
 	@Bean  
-	public RedisTemplate<String, String> redisTemplate(  
+	public RedisTemplate<String, String> stringJacksonRedisTemplate(  
 	        RedisConnectionFactory factory) {  
 	    StringRedisTemplate template = new StringRedisTemplate(factory);  
 	    Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);  

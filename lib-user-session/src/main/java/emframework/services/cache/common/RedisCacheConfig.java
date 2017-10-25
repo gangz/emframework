@@ -33,10 +33,10 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 public class RedisCacheConfig extends CachingConfigurerSupport {
 
     
-	@Autowired 	RedisTemplate redisTemplate;
+	@Autowired RedisTemplate<String, String> stringJacksonRedisTemplate;
 	@Bean
 	public CacheManager cacheManager() {
-		RedisCacheManager cacheManager = new RedisCacheManager(redisTemplate);
+		RedisCacheManager cacheManager = new RedisCacheManager(stringJacksonRedisTemplate);
 		cacheManager.setDefaultExpiration(300);
 		return cacheManager;
 	}
