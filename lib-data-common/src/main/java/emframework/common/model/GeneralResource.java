@@ -37,12 +37,16 @@ public abstract class GeneralResource {
      */
 	public void updateWithNewValue(Object newVal) throws IllegalArgumentException, IllegalAccessException {
 		if (this.getClass()!=newVal.getClass()) throw new IllegalArgumentException();
-		for (Field f : this.getClass().getDeclaredFields()) {
-			f.setAccessible(true);
-			if (f.get(newVal) != null) {
-				if (f.getDeclaredAnnotation(AcceptNewValue.class)!=null)
-					f.set(this, f.get(newVal));
+		Class c = this.getClass();
+		while (!c.equals(GeneralResource.class)){
+			for (Field f : c.getDeclaredFields()) {
+				f.setAccessible(true);
+				if (f.get(newVal) != null) {
+					if (f.getDeclaredAnnotation(AcceptNewValue.class)!=null)
+						f.set(this, f.get(newVal));
+				}
 			}
+			c= c.getSuperclass();
 		}
 	}
 }
