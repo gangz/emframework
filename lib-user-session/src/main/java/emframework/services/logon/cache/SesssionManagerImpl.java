@@ -1,8 +1,4 @@
 package emframework.services.logon.cache;
-import emframework.common.data.SessionDTO;
-import emframework.common.exception.UserNotLoggedInException;
-import emframework.util.json.JsonUtil;
-
 import java.io.IOException;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -10,7 +6,10 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+
+import emframework.common.data.SessionDTO;
+import emframework.common.exception.UserNotLoggedInException;
+import emframework.util.json.JsonUtil;
 
 
 @Component

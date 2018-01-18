@@ -9,7 +9,7 @@ public class SessionDTO implements Serializable {
 	private String userId = null;
 	private String role = null;
 	private String accountId = null;
-	
+	private String[] roles = new String[0];
 	public SessionDTO() {
 
 	}
@@ -55,6 +55,14 @@ public class SessionDTO implements Serializable {
 
 	public void setAccountId(String accountId) {
 		this.accountId = accountId;
+	}
+
+	public String[] getRoles() {
+		return roles;
+	}
+
+	public void setRoles(String[] roles) {
+		this.roles = roles;
 	}
 	
 }
