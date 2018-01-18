@@ -15,9 +15,12 @@ import emframework.common.data.SessionDTO;
 public abstract class Resource extends GeneralResource {
 	@Column(length=60,nullable=false)
 	private String creatorId=null;
-	@Column(length=60,nullable=false)
     private Long creationTime;
-    public Resource(){}
+    private Long lastUpdateTime;
+	@Column(length=60,nullable=false)
+	private String lastUpdatorId=null;
+
+	public Resource(){}
 	public Long getCreationTime() {
 		return creationTime;
 	}
@@ -35,4 +38,22 @@ public abstract class Resource extends GeneralResource {
 		this.setCreationTime(System.currentTimeMillis());
 		this.setCreatorId(session.getAccountId());
 	}
+	
+	public void addUpdateMark(SessionDTO session){
+		this.setLastUpdateTime(System.currentTimeMillis());
+		this.setLastUpdatorId(session.getAccountId());
+	}
+	public Long getLastUpdateTime() {
+		return lastUpdateTime;
+	}
+	public void setLastUpdateTime(Long lastUpdateTime) {
+		this.lastUpdateTime = lastUpdateTime;
+	}
+	public String getLastUpdatorId() {
+		return lastUpdatorId;
+	}
+	public void setLastUpdatorId(String lastUpdatorId) {
+		this.lastUpdatorId = lastUpdatorId;
+	}
+	
 }
