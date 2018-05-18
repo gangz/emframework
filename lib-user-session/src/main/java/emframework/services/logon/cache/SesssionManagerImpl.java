@@ -33,7 +33,7 @@ public class SesssionManagerImpl implements SesssionManager {
 	
 	private void add(String token, SessionDTO session, Long timeoutHours) {
 		String jsonSession = JsonUtil.toJsonString(session);
-		if (timeoutHours.equals(0)){
+		if (timeoutHours.equals(0L)){
 			redisTemplate.opsForValue().set(TOKEN+token, jsonSession);
 		}else{
 			System.out.println("add token " + timeoutHours);
