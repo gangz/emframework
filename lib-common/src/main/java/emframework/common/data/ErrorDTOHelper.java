@@ -4,8 +4,11 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import emframework.common.exception.ApplicationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ErrorDTOHelper {
+	private static Logger logger = LoggerFactory.getLogger(ErrorDTOHelper.class);
 
 	public static ErrorDTO toDto(Exception e) {
 		if(e==null) return null;
@@ -20,6 +23,7 @@ public class ErrorDTOHelper {
 					"traces:\n" +
 					errors.toString());
 		}
+		logger.error(r.toString());
 		return r;
 	}
 
